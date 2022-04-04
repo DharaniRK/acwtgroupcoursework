@@ -1,0 +1,19 @@
+.landing {
+    max-width: 500px;
+    max-height: 500px;
+}
+
+.outer {
+    max-width: 1000px;
+    max-height: 1000px;
+}
+
+.absolute {
+    max-width: 500px;
+    max-height: 500px;
+    position: absolute;
+    top: 150px;
+    bottom: 350px;
+    left: 40%;
+    margin-left: -70px;
+}
