@@ -9,7 +9,7 @@ export class GbuyHomeComponent implements OnInit {
   content?: string;
   constructor(private gbuyUsersService: GbuyUsersService) { }
   ngOnInit(): void {
-    this.gbuyUsersService.getPublicContent().subscribe(
+    this.gbuyUsersService.getUserData().subscribe(
       data => {
         this.content = data;
       },
