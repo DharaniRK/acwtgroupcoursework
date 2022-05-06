@@ -1,16 +1,15 @@
 <div>
     <div class="table-responsive" *ngIf="productsSummary.length >0">
-  
       <table class="table table-bordered table-hover">
         <thead class='thead'>
           <tr>
             <th>S.No</th>
-            <th>Image</th>
-            <th>ID</th>
+            <th>Product</th>
+            <th>Product Id</th>
             <th>Name</th>
-            <th>Price</th>
+            <th>Unit Price</th>
             <th>Quatity</th>
-            <th>Total Price</th>
+            <th>Total</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -23,11 +22,10 @@
                     src="{{list.gbuy_product_img}}"
                     style="height:80px;width:80px;"
                   />  
-                </td>
-              
+                </td>        
             <td>{{list.gbuy_product_id}}</td>        
             <td>{{list.gbuy_product_name}}</td>
-            <td>{{list.gbuy_product_price}}</td>
+            <td>{{list.gbuy_product_price | currency: 'GBP' }}</td>
             <td>{{list.gbuy_product_quanity}}</td>
             <td>{{list.gbuy_product_price * list.gbuy_product_quanity}}</td>
             <td>
@@ -35,7 +33,7 @@
                 class="btn btn-danger"
                 (click)="deleteProduct(list.gbuy_product_id)"
               >
-                Remove Item From Cart
+                Remove Item
               </button>
             </td>
           </tr>
@@ -43,13 +41,15 @@
         <tfoot>
           <tr>
             <td colspan="3"></td>
-            <td>Price {{price}}</td>
-            <td>Qty {{totalQuantity}}</td>
-            <td colspan="2">Sum {{totalPrice | currency: 'INR' }}</td>
+            <td>Price {{price | currency: 'GBP' }}</td>
+            <td>Quatity {{totalQuantity}}</td>
+            <td colspan="2">Sum {{totalPrice | currency: 'GBP' }}</td>
+            <td> <button class="btn btn-success">
+                        Submit Order            
+            </button></td>
           </tr>
         </tfoot>
       </table>
     </div>
   </div>
-  
   
