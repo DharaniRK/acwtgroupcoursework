@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { GbuyAuthService } from '../services/gbuy-auth.service';
-//import { GbuyTokenLoadService } from '../services/gbuy-token-load.service';
+
 @Component({
   selector: 'app-gbuy-login',
   templateUrl: './gbuy-login.component.html',
@@ -12,13 +13,13 @@ export class GbuyLoginComponent implements OnInit {
     pwd: null
   };
   isLoginFailed = false;
+  isInvalidDetails = false;
   isLoggedIn = false;
   rolesList: string[] = [];
   errorMessageStr = '';
   loginFlag='';
 
-  constructor(private gbuyAuthService: GbuyAuthService) { }
-
+  constructor(private gbuyAuthService: GbuyAuthService,private router: Router) { }
   ngOnInit(): void {
   
   }
@@ -30,6 +31,14 @@ export class GbuyLoginComponent implements OnInit {
         this.loginFlag=data;
         this.isLoggedIn = true;
         this.isLoginFailed = false;
+        if(this.loginFlag==='True'){
+          console.log(this.loginFlag)
+          this.router.navigate([`products`]);
+        }else{ 
+          this.isLoggedIn = false;
+          console.log(this.loginFlag)
+          this.isInvalidDetails = true;
+        }
       },
       err => {
         this.errorMessageStr = err.error.message;
