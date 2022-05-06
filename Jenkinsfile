@@ -11,7 +11,7 @@ node {
         /* This builds the actual image; synonymous to
          * docker build on the command line */
 
-        app = docker.build("gbuy-login-service/")
+        app = docker.build("gbuy-login-service/gbuy-login-service")
     }
 
     stage('Test image') {
