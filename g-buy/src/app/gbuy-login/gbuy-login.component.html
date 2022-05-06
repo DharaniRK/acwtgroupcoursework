@@ -9,12 +9,12 @@
         novalidate
       >
         <div class="form-group"   class="landing">
-          <label for="username">EmailID</label>
+          <label for="username">Username</label>
           <input
             type="text"
             class="form-control"
             name="username"
-            [(ngModel)]="form.username"
+            [(ngModel)]="form.uname"
             required
             #username="ngModel"
           />
@@ -63,8 +63,5 @@
           </div>
         </div>
       </form>
-      <div class="alert alert-success" *ngIf="isLoggedIn">
-        Logged in as {{ rolesList }}.
-      </div>
     </div>
   </div>
