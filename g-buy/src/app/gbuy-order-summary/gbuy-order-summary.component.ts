@@ -18,7 +18,6 @@ export class GbuyOrderSummaryComponent implements OnInit {
 
   ngOnInit(): void {
     this.productsService.summaryList.forEach(product => {
-      alert("cart-list-ngOnInit");
       let index = -1;
       index = this.productsSummary.findIndex(
         p => p.gbuy_product_id === product.gbuy_product_id
