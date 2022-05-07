@@ -4,7 +4,9 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class GbuyTokenLoadService {
-
+  loginFlag='';
+  firstName='';
+  userId='';
   constructor() { }
   signOut(): void {
     window.sessionStorage.clear();

@@ -8,14 +8,16 @@ CORS(app)
 
 @app.route('/')
 def hello_world():
-  return 'Hello, Docker2!'
+  return 'Hello, order!'
 
-@app.route('/ordersummary',methods=['POST'])
+@app.route('/orderSummary',methods=['POST'])
 def get_userdetails():
   data = json.loads(request.data.decode())
+  print('--------------------------')
   print(data)
-  email = data["username"]
-  password = data["password"]
+  print('-------------------------')
+  email = 'dharani@gmail.com'
+  password = 'dharani'
   mydb = mysql.connector.connect(
     host="mysqldb",
     user="root",
@@ -45,4 +47,4 @@ def get_userdetails():
 
 
 if __name__ == "__main__":
-  app.run(host ='0.0.0.0')
+  app.run(host ='0.0.0.0',port='8001')

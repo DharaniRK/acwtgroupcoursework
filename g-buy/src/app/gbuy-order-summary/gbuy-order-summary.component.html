@@ -25,7 +25,7 @@
                 </td>        
             <td>{{list.gbuy_product_id}}</td>        
             <td>{{list.gbuy_product_name}}</td>
-            <td>{{list.gbuy_product_price | currency: 'GBP' }}</td>
+            <td>{{list.gbuy_product_price}}</td>
             <td>{{list.gbuy_product_quanity}}</td>
             <td>{{list.gbuy_product_price * list.gbuy_product_quanity}}</td>
             <td>
@@ -41,13 +41,10 @@
         <tfoot>
           <tr>
             <td colspan="3"></td>
-
-            <td>Price {{price | currency: 'GBP' }}</td>
+            <td>Price {{price}}</td>
             <td>Quatity {{totalQuantity}}</td>
-
-            <td colspan="2">Sum {{totalPrice | currency: 'GBP' }}</td>
-
-            <td> <button class="btn btn-success">
+            <td colspan="2">Sum {{totalPrice | currency: 'INR' }}</td>
+            <td> <button class="btn btn-success" (click)="orderProducts()">
                         Submit Order            
             </button></td>
           </tr>
@@ -55,4 +52,5 @@
       </table>
     </div>
   </div>
+  
   

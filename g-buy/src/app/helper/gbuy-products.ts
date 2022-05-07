@@ -5,5 +5,4 @@ export interface gbuyProducts {
     gbuy_product_price: number;
     gbuy_product_details: string;
     gbuy_product_quanity: number;
-    gbuy_product_itemquantity: string;
   }
