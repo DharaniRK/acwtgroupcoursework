@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { GbuyProductsService } from '../services/gbuy-products.service';
+
+import { gbuyProducts } from '../helper/gbuy-products';
+import { Router } from '@angular/router';
+
+
 import { GbuyOrderSummaryService } from '../services/gbuy-order-summary.service';
-import {gbuyProducts} from '../helper/gbuy-products';
 import { GbuyTokenLoadService } from '../services/gbuy-token-load.service';
+
 @Component({
   selector: 'app-gbuy-order-summary',
   templateUrl: './gbuy-order-summary.component.html',
@@ -14,9 +19,10 @@ export class GbuyOrderSummaryComponent implements OnInit {
   totalQuantity!: number;
   productsSummary: gbuyProducts[] = [];
   price!: number;
+
   orderId: any
   constructor(private productsService:GbuyProductsService,private orderSummaryService: GbuyOrderSummaryService,
-    private gbuyTokenLoadService: GbuyTokenLoadService) { }
+    private gbuyTokenLoadService: GbuyTokenLoadService, private router: Router) { }
 
   ngOnInit(): void {
     this.productsService.summaryList.forEach(product => {
@@ -37,6 +43,9 @@ export class GbuyOrderSummaryComponent implements OnInit {
     this.productsSummary.splice(productIndex, 1);
     this.addproduct();
   }
+  goToConfirmation(navigate: string) {
+    this.router.navigate([`${navigate}`]);
+  }
   addproduct(): void {
     this.totalQuantity = 0;
     this.price = 0;
@@ -49,6 +58,7 @@ export class GbuyOrderSummaryComponent implements OnInit {
       });
  
     }
+  }
   }
   orderProducts() {
     let productsList: gbuyProducts[] = [];
