@@ -16,6 +16,8 @@ button.btn{
     justify-content: space-between;
 }
 .img-thumbnail{
-    margin-right: 100px;
+    margin-right: 50px;
 }
-
+thead {
+  background-color: #1f1461b0;
+}
