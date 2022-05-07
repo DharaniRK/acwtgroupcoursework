@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GbuyProductsService } from '../services/gbuy-products.service';
+import { GbuyOrderSummaryService } from '../services/gbuy-order-summary.service';
 import {gbuyProducts} from '../helper/gbuy-products';
 
 @Component({
@@ -13,8 +14,8 @@ export class GbuyOrderSummaryComponent implements OnInit {
   totalQuantity!: number;
   productsSummary: gbuyProducts[] = [];
   price!: number;
-
-  constructor(private productsService:GbuyProductsService) { }
+  orderId: any
+  constructor(private productsService:GbuyProductsService,private orderSummaryService: GbuyOrderSummaryService) { }
 
   ngOnInit(): void {
     this.productsService.summaryList.forEach(product => {
@@ -48,4 +49,19 @@ export class GbuyOrderSummaryComponent implements OnInit {
  
     }
   }
+  orderProducts() {
+    console.log("productsSummary : "+String(this.productsSummary))
+    this.orderSummaryService.order(this.productsSummary).subscribe(
+      data => {
+        this.orderId=data
+      },
+      err => {
+        this.orderId="Invalid Order"
+      }
+    );
+  }
+
+
+
+
   }

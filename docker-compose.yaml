@@ -1,0 +1,23 @@
+version: "3.9"
+services:
+    gbuyfrontend:
+      build:
+        context: g-buy
+        dockerfile: Dockerfile
+      ports:
+        - "8081:80"
+      
+    gbuyloginservice:
+       build:
+        context: gbuy-login-service
+        dockerfile: Dockerfile
+       ports:
+          - "8000:5000"
+       networks:
+          - mysqlnet
+volumes:
+  mysql:
+  mysql_config: 
+networks:
+  mysqlnet: 
+    external: true
