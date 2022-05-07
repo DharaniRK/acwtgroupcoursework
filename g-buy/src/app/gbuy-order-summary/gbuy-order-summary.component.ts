@@ -59,7 +59,7 @@ export class GbuyOrderSummaryComponent implements OnInit {
  
     }
   }
-  }
+  
   orderProducts() {
     let productsList: gbuyProducts[] = [];
     productsList = this.productsSummary;
@@ -77,6 +77,6 @@ export class GbuyOrderSummaryComponent implements OnInit {
   }
 
 
+}
 
-
-  }
+  
