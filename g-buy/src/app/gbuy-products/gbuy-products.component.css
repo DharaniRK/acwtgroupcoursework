@@ -16,8 +16,9 @@ button.btn{
     justify-content: space-between;
 }
 .img-thumbnail{
-    margin-right: 50px;
+    margin-right: 100px;
 }
-thead {
-  background-color: #1f1461b0;
+.is-login{
+    margin-right: 10px;
 }
+

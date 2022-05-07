@@ -7,11 +7,23 @@
       </li>
     </ul>
     <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
-      <li class="nav-item">
-        <a href="/login" class="nav-link" routerLink="login">LogOut</a>
-      </li>
+        <button style="border:none;background-color: #343a40;" (click)="logout('logout')">
+          <a style="color: #959ba0;">LogOut</a>
+        </button>
+    
       <li class="nav-item">
         <a href="/login" class="nav-link" routerLink="login">Login</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
+        <button style="border:none;background-color: #343a40;" (click)="logout('logout')">
+          <a style="color: #959ba0;">LogOut</a>
+        </button>
+      
+      <li class="nav-item">
+        <a href="/products" class="nav-link" routerLink="login">
+          "{{firstName}}"
+        </a>
       </li>
     </ul>
   </nav>

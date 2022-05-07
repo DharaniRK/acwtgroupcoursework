@@ -1,3 +1,6 @@
+<div *ngIf="loginFlg"style="margin-left: 900px;">
+  <label for="html">Login : "{{firstName}}"</label><br>
+</div>
 <div>
     <div class="table-responsive" *ngIf="productsSummary.length >0">
       <table class="table table-bordered table-hover">
@@ -44,7 +47,7 @@
             <td>Price {{price | currency: 'GBP' }}</td>
             <td>Quatity {{totalQuantity}}</td>
             <td colspan="2">Sum {{totalPrice | currency: 'GBP' }}</td>
-            <td> <button class="btn btn-success" (click)="goToConfirmation('confirmation')">
+            <td> <button class="btn btn-success" (click)="orderProducts()">
                         Submit Order            
             </button></td>
           </tr>
@@ -52,4 +55,5 @@
       </table>
     </div>
   </div>
+  
   

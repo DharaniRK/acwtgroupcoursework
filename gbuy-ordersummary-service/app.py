@@ -1,7 +1,8 @@
 import mysql.connector
 import json
-from flask import Flask,request,jsonify
+from flask import Flask,request
 from flask_cors import CORS
+from decimal import Decimal
 
 app = Flask(__name__)
 CORS(app)
@@ -13,11 +14,9 @@ def hello_world():
 @app.route('/orderSummary',methods=['POST'])
 def get_userdetails():
   data = json.loads(request.data.decode())
-  print('--------------------------')
   print(data)
-  print('-------------------------')
-  email = 'dharani@gmail.com'
-  password = 'dharani'
+
+
   mydb = mysql.connector.connect(
     host="mysqldb",
     user="root",
@@ -25,26 +24,22 @@ def get_userdetails():
     database="gbuy"
   )
   cursor = mydb.cursor()
+  order_id='ord_001'
+  for key, value in data.items():
+    for product in value:
+      order_id = 'ord_' + str(product.get('gbuy_product_details'))
+      total_price=Decimal(product.get('gbuy_product_quanity'))*Decimal(product.get('gbuy_product_price'))
+      sql = "INSERT INTO gbuy.OrderDetails (OrderID,UserID,ProductName,Quantity,UnitPrice,FinalPrice) VALUES (%s, %s,%s,%s,%s,%s)"
+      val = (order_id,product.get('gbuy_product_details'),product.get('gbuy_product_name'),
+             product.get('gbuy_product_quanity'), product.get('gbuy_product_price'), total_price)
+      cursor.execute(sql, val)
+      
 
-
-  cursor.execute("SELECT password FROM UserDetails WHERE EmailID = '%s'" % (email))
-
-  try:
-    userpassword = cursor.fetchone()
-  except Exception as e:
-    userpassword='false'
-  print(userpassword)
-  for passwd in userpassword:
-    if passwd==password:
-      cursor.execute('')
-      return jsonify('True'),200
-    else:
-      return jsonify('False'),200
+      mydb.commit()
 
   cursor.close()
-
-
+  return {'order_id':order_id}
 
 
 if __name__ == "__main__":
-  app.run(host ='0.0.0.0',port='8001')
+  app.run(host ='0.0.0.0')

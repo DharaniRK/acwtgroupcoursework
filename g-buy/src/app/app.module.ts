@@ -9,15 +9,15 @@ import { FormsModule } from '@angular/forms';
 import { GbuyProductsComponent } from './gbuy-products/gbuy-products.component';
 import { GbuyOrderSummaryComponent } from './gbuy-order-summary/gbuy-order-summary.component';
 import { GbuyProductsService } from './services/gbuy-products.service';
-import { GbuyOrderConfirmationComponent } from './gbuy-order-confirmation/gbuy-order-confirmation.component';
-
+import { GbuyTokenLoadService } from './services/gbuy-token-load.service';
+import { GbuyLogoutComponent } from './gbuy-logout/gbuy-logout.component';
 @NgModule({
   declarations: [
     GbuyLoginComponent,
     AppComponent,
     GbuyProductsComponent,
     GbuyOrderSummaryComponent,
-    GbuyOrderConfirmationComponent
+    GbuyLogoutComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +25,7 @@ import { GbuyOrderConfirmationComponent } from './gbuy-order-confirmation/gbuy-o
     FormsModule,
     HttpClientModule
   ],
-  providers: [GbuyProductsService],
+  providers: [GbuyProductsService,GbuyTokenLoadService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
