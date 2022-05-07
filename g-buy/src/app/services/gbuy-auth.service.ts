@@ -9,6 +9,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class GbuyAuthService {
+
   constructor(private http: HttpClient) { }
   login(username: any, password: string): Observable<any> {
     return this.http.post(AUTH_API + '/login', {

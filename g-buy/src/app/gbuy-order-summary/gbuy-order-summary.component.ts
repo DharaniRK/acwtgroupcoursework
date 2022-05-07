@@ -1,12 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GbuyProductsService } from '../services/gbuy-products.service';
-
 import { gbuyProducts } from '../helper/gbuy-products';
 import { Router } from '@angular/router';
-
-
-import { GbuyOrderSummaryService } from '../services/gbuy-order-summary.service';
-import { GbuyTokenLoadService } from '../services/gbuy-token-load.service';
 
 @Component({
   selector: 'app-gbuy-order-summary',
@@ -20,9 +15,7 @@ export class GbuyOrderSummaryComponent implements OnInit {
   productsSummary: gbuyProducts[] = [];
   price!: number;
 
-  orderId: any
-  constructor(private productsService:GbuyProductsService,private orderSummaryService: GbuyOrderSummaryService,
-    private gbuyTokenLoadService: GbuyTokenLoadService, private router: Router) { }
+  constructor(private productsService: GbuyProductsService, private router: Router) { }
 
   ngOnInit(): void {
     this.productsService.summaryList.forEach(product => {
@@ -78,5 +71,3 @@ export class GbuyOrderSummaryComponent implements OnInit {
 
 
 }
-
-  

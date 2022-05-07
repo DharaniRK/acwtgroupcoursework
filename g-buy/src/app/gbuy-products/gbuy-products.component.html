@@ -1,32 +1,50 @@
-<div *ngIf="loginFlg"style="margin-left: 900px;">
-  <label for="html">Login : "{{firstName}}"</label><br>
-</div>
 <div>
-    <div *ngFor="let product of products" class="container">
-      <div class="flex-container">
-        <img
-          class="img-thumbnail .img-responsive .flex-items"
-          src="{{product.gbuy_product_img}}"
-          style="height:80px;width:80px;"
-        />
-        <div class="flex-items">
-          <p>Item Code: {{product.gbuy_product_id}}</p>
-          <p>Item Name:{{product.gbuy_product_name}}</p>
-          <p>Price: {{product.gbuy_product_price}}</p>
-        </div>
-        <div class="flex-items .flex-container">
+  <table class="table table-bordered table-hover">
+    <thead class='thead'>
+      <tr>
+        <th>Product</th>
+        <th>Name</th>
+        <th>Quatity</th>
+        <th>Unit Price</th>
+        <th>Description</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products" class="container">
+        <td>
+          <img class="img-thumbnail .img-responsive .flex-items"
+               src="{{product.gbuy_product_img}}"
+               style="height:150px;width:150px;" />
+        </td>
+        <td>
+          <p>{{product.gbuy_product_name}}</p>
+        </td>
+        <td>
+          <p>{{product.gbuy_product_itemquantity}}</p>
+        </td>
+        <td>
+          <p>{{product.gbuy_product_price| currency: 'GBP' }}</p>
+        </td>
+        <td>
           <button class="btn btn-primary btn-sm" (click)="view(product)">View</button>
-          &nbsp;
+        </td>
+        <td>
           <button class="btn btn-primary btn-sm" (click)="addToCart(product)">
             Add to Cart
           </button>
-        </div>
-      </div>
-    </div>
-    <div>
-      <button class="btn btn-primary btn-sm" (click)="goToSummary('summary')"> 
-        Order Summary
-      </button>
-    </div>
-  </div>
-  
+        </td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="5"></td>
+        <td>
+          <button class="btn btn-success" (click)="goToSummary('summary')">
+            Order Summary
+          </button>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+</div>

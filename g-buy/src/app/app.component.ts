@@ -7,14 +7,14 @@ import { GbuyTokenLoadService } from './services/gbuy-token-load.service';
 })
 export class AppComponent{
   title = 'g-buy';
-  firstName:any;
+  private roles: string[] = [];
   isLoggedIn = false;
-  constructor(private tokenStorageService: GbuyTokenLoadService) { 
-  
-  }
-  ngOnInit(){
-    this.isLoggedIn=Boolean(this.tokenStorageService.loginFlag)
-    this.firstName=window.sessionStorage.getItem("firstName")
+  showAdminBoard = false;
+  showModeratorBoard = false;
+  uname?: string;
+  constructor(private tokenStorageService: GbuyTokenLoadService) { }
+  ngOnInit(): void {
+    
   }
   logout(): void {
     this.tokenStorageService.signOut();
