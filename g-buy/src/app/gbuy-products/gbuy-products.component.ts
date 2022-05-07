@@ -16,6 +16,7 @@ export class GbuyProductsComponent implements OnInit {
     this.products = this.productsService.getProducts();
   }
   addToCart(product:gbuyProducts): void {
+
     this.productsService.summaryList.push(product)
     console.log(product.gbuy_product_name)
     alert(product.gbuy_product_name+" Added in the Cart")
