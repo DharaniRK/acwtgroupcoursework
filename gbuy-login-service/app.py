@@ -1,27 +1,53 @@
-from flask import Flask,request
+import mysql.connector
 import json
-import pymysql
+from flask import Flask,request,jsonify
+from flask_cors import CORS
 
+app = Flask(__name__)
+CORS(app)
 
-app= Flask(__name__)
-db = pymysql.connect('localhost','root','password','gbuy')
-cursor= db.cursor()
+@app.route('/')
+def hello_world():
+  return 'Hello, status!'
 
-@app.route("/login", methods=['POST'])
-
+@app.route('/login',methods=['POST'])
 def get_userdetails():
+  data = json.loads(request.data.decode())
+  print(data)
+  email = data["username"]
+  #email='dharani@gmail.com'
+  #password='dharani'
+  password = data["password"]
+  mydb = mysql.connector.connect(
+    host="mysqldb",
+    user="root",
+    password="p@ssw0rd1",
+    database="gbuy"
+  )
+  cursor = mydb.cursor()
 
-    data=json.loads(request.data.decode())
-    print(data)
-    email=data["email"]
-    password=data["password"]
-    get_userpassword=cursor.execute("SELECT password FROM users WHERE EmailID = '%s'" % (email))
-    #select password from user_details where username=username
-    if password==get_userpassword:
-        print('true')
-        return {"login":True}
+
+  cursor.execute("SELECT UserID, FirstName,password FROM UserDetails WHERE EmailID = '%s'" % (email))
+
+  try:
+    userpassword = cursor.fetchone()
+  except Exception as e:
+    userpassword='false'
+  userpassword = [userpassword]
+  print(userpassword)
+  for (userid,firstname,passwd) in userpassword:
+    if passwd==password:
+      status='True'
+
+      return ({'status':status,'firstName':firstname,'userId':userid})
     else:
-        print('false')
-        return {"login":False}
+      status='false'
+      return ({'status':status})
+
+  cursor.close()
 
 
+
+
+if __name__ == "__main__":
+  app.run(host ='0.0.0.0')
