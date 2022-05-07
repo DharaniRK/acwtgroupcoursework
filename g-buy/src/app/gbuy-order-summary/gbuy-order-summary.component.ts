@@ -52,4 +52,22 @@ export class GbuyOrderSummaryComponent implements OnInit {
  
     }
   }
+  
+  orderProducts() {
+    let productsList: gbuyProducts[] = [];
+    productsList = this.productsSummary;
+    productsList.forEach((productDetails)=>{
+      productDetails. gbuy_product_details=this.gbuyTokenLoadService.userId
+    });
+    this.orderSummaryService.order(productsList).subscribe(
+      data => {
+        this.orderId=data
+      },
+      err => {
+        this.orderId="Invalid Order"
+      }
+    );
   }
+
+
+}
