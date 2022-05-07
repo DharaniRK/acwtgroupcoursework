@@ -10,7 +10,7 @@ CORS(app)
 def hello_world():
   return 'Hello, Docker2!'
 
-@app.route('/login',methods=['POST'])
+@app.route('/ordersummary',methods=['POST'])
 def get_userdetails():
   data = json.loads(request.data.decode())
   print(data)
@@ -34,6 +34,7 @@ def get_userdetails():
   print(userpassword)
   for passwd in userpassword:
     if passwd==password:
+      cursor.execute('')
       return jsonify('True'),200
     else:
       return jsonify('False'),200

@@ -44,7 +44,7 @@
             <td>Price {{price}}</td>
             <td>Quatity {{totalQuantity}}</td>
             <td colspan="2">Sum {{totalPrice | currency: 'INR' }}</td>
-            <td> <button class="btn btn-success">
+            <td> <button class="btn btn-success" (click)="orderProducts()">
                         Submit Order            
             </button></td>
           </tr>
