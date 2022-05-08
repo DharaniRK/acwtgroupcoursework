@@ -64,9 +64,8 @@ export class GbuyOrderSummaryComponent implements OnInit {
     });
     this.orderSummaryService.order(productsList).subscribe(
       data => {
-        this.orderId=data.order_id
-        alert("Your Order is placed and your orderId is : "+this.orderId+
-        " The order will be delivered in next 2 working days to the registered address")
+        this.orderId=data
+        alert("Your Order is placed and your orderId is : "+this.orderId)
       },
       err => {
         this.orderId="Invalid Order"
