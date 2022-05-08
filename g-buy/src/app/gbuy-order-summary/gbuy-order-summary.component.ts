@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GbuyProductsService } from '../services/gbuy-products.service';
 import { GbuyOrderSummaryService } from '../services/gbuy-order-summary.service';
 import {gbuyProducts} from '../helper/gbuy-products';
-
+import { GbuyTokenLoadService } from '../services/gbuy-token-load.service';
 @Component({
   selector: 'app-gbuy-order-summary',
   templateUrl: './gbuy-order-summary.component.html',
@@ -15,7 +15,10 @@ export class GbuyOrderSummaryComponent implements OnInit {
   productsSummary: gbuyProducts[] = [];
   price!: number;
   orderId: any
-  constructor(private productsService:GbuyProductsService,private orderSummaryService: GbuyOrderSummaryService) { }
+  firstName:any
+  loginFlg:any;
+  constructor(private productsService:GbuyProductsService,private orderSummaryService: GbuyOrderSummaryService,
+    private gbuyTokenLoadService: GbuyTokenLoadService) { }
 
   ngOnInit(): void {
     this.productsService.summaryList.forEach(product => {
@@ -30,12 +33,17 @@ export class GbuyOrderSummaryComponent implements OnInit {
       }
       this.addproduct();
     });
+    this.firstName=this.gbuyTokenLoadService.firstName
+    this.loginFlg=Boolean(this.gbuyTokenLoadService.loginFlag);
   }
   deleteProduct(productId: any) {
     let productIndex = this.productsSummary.findIndex(item => item.gbuy_product_id === productId);
     this.productsSummary.splice(productIndex, 1);
     this.addproduct();
   }
+  //goToConfirmation(navigate: string) {
+  //  this.router.navigate([`${navigate}`]);
+  //}
   addproduct(): void {
     this.totalQuantity = 0;
     this.price = 0;
@@ -46,14 +54,19 @@ export class GbuyOrderSummaryComponent implements OnInit {
         this.price += product.gbuy_product_price;
         this.totalPrice += product.gbuy_product_price * product.gbuy_product_quanity;
       });
- 
     }
   }
   orderProducts() {
-    console.log("productsSummary : "+String(this.productsSummary))
-    this.orderSummaryService.order(this.productsSummary).subscribe(
+    let productsList: gbuyProducts[] = [];
+    productsList = this.productsSummary;
+    productsList.forEach((productDetails)=>{
+      productDetails. gbuy_product_details=this.gbuyTokenLoadService.userId
+    });
+    this.orderSummaryService.order(productsList).subscribe(
       data => {
-        this.orderId=data
+        this.orderId=data.order_id
+        alert("Your Order is placed and your orderId is : "+this.orderId+
+        " The order will be delivered in next 2 working days to the registered address")
       },
       err => {
         this.orderId="Invalid Order"

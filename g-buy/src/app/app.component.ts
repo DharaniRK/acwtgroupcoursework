@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { GbuyTokenLoadService } from './services/gbuy-token-load.service';
 @Component({
   selector: 'app-root',
@@ -7,17 +8,18 @@ import { GbuyTokenLoadService } from './services/gbuy-token-load.service';
 })
 export class AppComponent{
   title = 'g-buy';
-  private roles: string[] = [];
+  firstName:any;
   isLoggedIn = false;
-  showAdminBoard = false;
-  showModeratorBoard = false;
-  uname?: string;
-  constructor(private tokenStorageService: GbuyTokenLoadService) { }
-  ngOnInit(): void {
-    
+  constructor(private tokenStorageService: GbuyTokenLoadService,private router: Router) { 
+  
   }
-  logout(): void {
+  ngOnInit(){
+    this.isLoggedIn=Boolean(this.tokenStorageService.loginFlag)
+    this.firstName=window.sessionStorage.getItem("firstName")
+  }
+  logout(navigate: string): void {
     this.tokenStorageService.signOut();
-    window.location.reload();
+    this.router.navigate([`${navigate}`]);
   }
+ 
 }

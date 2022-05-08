@@ -8,13 +8,15 @@ CORS(app)
 
 @app.route('/')
 def hello_world():
-  return 'Hello, Docker3!'
+  return 'Hello, status!'
 
 @app.route('/login',methods=['POST'])
 def get_userdetails():
   data = json.loads(request.data.decode())
   print(data)
   email = data["username"]
+  #email='dharani@gmail.com'
+  #password='dharani'
   password = data["password"]
   mydb = mysql.connector.connect(
     host="mysqldb",
@@ -25,18 +27,22 @@ def get_userdetails():
   cursor = mydb.cursor()
 
 
-  cursor.execute("SELECT password FROM UserDetails WHERE EmailID = '%s'" % (email))
+  cursor.execute("SELECT UserID, FirstName,password FROM UserDetails WHERE EmailID = '%s'" % (email))
 
   try:
     userpassword = cursor.fetchone()
   except Exception as e:
     userpassword='false'
+  userpassword = [userpassword]
   print(userpassword)
-  for passwd in userpassword:
+  for (userid,firstname,passwd) in userpassword:
     if passwd==password:
-      return jsonify('True'),200
+      status='True'
+
+      return ({'status':status,'firstName':firstname,'userId':userid})
     else:
-      return jsonify('False'),200
+      status='false'
+      return ({'status':status})
 
   cursor.close()
 

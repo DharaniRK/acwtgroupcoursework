@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './gbuy-order-confirmation.component.html',
   styleUrls: ['./gbuy-order-confirmation.component.css']
 })
+  
 export class GbuyOrderConfirmationComponent implements OnInit {
 
   constructor() { }

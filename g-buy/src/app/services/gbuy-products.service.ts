@@ -9,6 +9,7 @@ export class GbuyProductsService {
 
   constructor() { }
   summaryList:gbuyProducts[]= [];
+
   getProducts() {
     return [
       {
