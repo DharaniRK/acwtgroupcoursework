@@ -28,10 +28,21 @@ def get_userdetails():
     productdetails = cursor.fetchall()
   except Exception as e:
     productdetails='none'
-  print(productdetails)
+  final_product_array=[]
+  product_keys=['gbuy_product_id','gbuy_product_name','gbuy_product_itemquantity','gbuy_product_price',
+                'gbuy_product_details']
+  for product in productdetails:
+      product_array=dict(zip(product_keys,product))
+      product_array.update({'gbuy_product_quanity':1,'gbuy_product_img':'/assets/'+product[1].lower()+'.jpg'})
+      print('----------------------------------')
+      print(product_array)
+      final_product_array.append(product_array)
+      print('---------------final-----------')
+      print(final_product_array)
+      print('-----------------------------------')
   cursor.close()
-
-  return jsonify(productdetails)
+  print(final_product_array)
+  return jsonify(final_product_array)
 
 
 
