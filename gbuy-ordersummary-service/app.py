@@ -33,7 +33,7 @@ def get_userdetails():
       val = (order_id,product.get('gbuy_product_details'),product.get('gbuy_product_name'),
              product.get('gbuy_product_quanity'), product.get('gbuy_product_price'), total_price)
       cursor.execute(sql, val)
-      
+
 
       mydb.commit()
 

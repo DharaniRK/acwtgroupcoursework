@@ -25,6 +25,15 @@ services:
       networks:
         - mysqlnet
 
+    gbuygetproducutsservice:
+      build:
+        context: gbuy-getproducts-service
+        dockerfile: Dockerfile
+      ports:
+        - "8002:5000"
+      networks:
+        - mysqlnet
+
 volumes:
   mysql:
   mysql_config: 
