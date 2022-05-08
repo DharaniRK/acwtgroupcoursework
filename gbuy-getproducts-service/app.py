@@ -8,9 +8,9 @@ CORS(app)
 
 @app.route('/')
 def hello_world():
-  return 'Hello, status!'
+  return 'Hello, productdetails!'
 
-@app.route('/getProducts',methods=['POST'])
+@app.route('/getProducts')
 def get_userdetails():
 
   mydb = mysql.connector.connect(
@@ -22,24 +22,17 @@ def get_userdetails():
   cursor = mydb.cursor()
 
 
-  cursor.execute("SELECT UserID, FirstName,password FROM UserDetails WHERE EmailID = '%s'" % (email))
+  cursor.execute("SELECT *  FROM  ProductDetails")
 
   try:
-    userpassword = cursor.fetchone()
+    productdetails = cursor.fetchall()
   except Exception as e:
-    userpassword='false'
-  userpassword = [userpassword]
-  print(userpassword)
-  for (userid,firstname,passwd) in userpassword:
-    if passwd==password:
-      status='True'
-
-      return ({'status':status,'firstName':firstname,'userId':userid})
-    else:
-      status='false'
-      return ({'status':status})
-
+    productdetails='none'
+  print(productdetails)
   cursor.close()
+
+  return jsonify(productdetails)
+
 
 
 
