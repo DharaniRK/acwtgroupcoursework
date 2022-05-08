@@ -25,6 +25,7 @@ def get_userdetails():
   )
   cursor = mydb.cursor()
   order_id='ord_001'
+  print(data)
   for key, value in data.items():
     for product in value:
       order_id = 'ord_' + str(product.get('gbuy_product_details'))

@@ -14,10 +14,20 @@ export class GbuyProductsComponent implements OnInit {
   constructor(private productsService:GbuyProductsService,private router: Router,private gbuyTokenLoadService: GbuyTokenLoadService) { }
   firstName:any
   loginFlg:any;
+ 
   ngOnInit() {
-    this.products = this.productsService.getProducts();
-    this.firstName=this.gbuyTokenLoadService.firstName
-    this.loginFlg=Boolean(this.gbuyTokenLoadService.loginFlag);
+    this.productsService.getProducts().subscribe(
+      data => { 
+        this.products=data  
+        this.firstName=this.gbuyTokenLoadService.firstName
+        this.loginFlg=Boolean(this.gbuyTokenLoadService.loginFlag); 
+      },
+        err => {
+          this.products
+          this.firstName=this.gbuyTokenLoadService.firstName
+          this.loginFlg=Boolean(this.gbuyTokenLoadService.loginFlag);
+      }
+    );
   }
   addToCart(product:gbuyProducts): void {
     this.productsService.summaryList.push(product)
