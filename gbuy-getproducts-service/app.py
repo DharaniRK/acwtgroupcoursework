@@ -34,19 +34,9 @@ def get_userdetails():
   for product in productdetails:
       product_array=dict(zip(product_keys,product))
       product_array.update({'gbuy_product_quanity':1,'gbuy_product_img':'/assets/'+product[1].lower()+'.jpg'})
-      print('----------------------------------')
-      print(product_array)
       final_product_array.append(product_array)
-      print('---------------final-----------')
-      print(final_product_array)
-      print('-----------------------------------')
   cursor.close()
-  print(final_product_array)
   return jsonify(final_product_array)
-
-
-
-
 
 if __name__ == "__main__":
   app.run(host ='0.0.0.0')
